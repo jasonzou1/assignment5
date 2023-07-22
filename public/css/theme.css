@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body, html {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to bottom, #F6F6F6, white);
+    overflow: auto;
+}
+
+.container {
+    background-color: white;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.15);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+h1, h2, h3 {
+    color: #013243;
+}
+
+a, p {
+    color: #0278AE;
+}
+
+body, html {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to bottom, #F6F6F6, white);
+    overflow: auto;
+}
+
+.navbar.bg-light {
+    background: #0278AE;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: #F6F6F6;
+}
+
+.btn-primary {
+    background: #013243;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.btn-primary:hover {
+    background: #0278AE;
+}
+
+table tr:nth-child(odd) td {
+    background-color: #d3d3d3;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #013243;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+a {
+    color: #013243;
+}
+
+a:hover {
+    color: #0278AE;
+}
+
+legend {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #013243;
+    text-shadow: 2px 2px 4px #000000;
+}

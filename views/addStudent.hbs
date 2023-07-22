@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Student</title>
+    <!-- Include your CSS link here -->
+    <link rel="stylesheet" href="/css/theme.css">
+</head>
+
+<body>
+    <nav>
+        <ul class="nav navbar-nav  mr-auto">
+            <!-- Add the other links here -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/students/add">Add Student</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="col-md-12">
+        <form method="POST" action="/students/add">
+            <fieldset>
+                <legend>Add Student</legend>
+
+                <div class="form-group">
+                    <label>First Name:</label>
+                    <input class="form-control" name="firstName" type="text" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Last Name:</label>
+                    <input class="form-control" name="lastName" type="text" required>
+                </div>
+
+                <!-- Add other form inputs here -->
+
+                <button type="submit" class="btn btn-primary">Add Student</button>
+            </fieldset>
+        </form>
+    </main>
+</body>
+
+</html>
