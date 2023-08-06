@@ -23,37 +23,26 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 
-// GET /students
 app.get('/students', (req, res) => {
-    const { course } = req.query;
-    if (course) {
-        console.log(course)
-        collegeData.getStudentsByCourse(course)
-            .then(students => {
-                if (students.length === 0) {
-                    res.render("students", {message: "no results"});
-                } else {
-                    res.render("students", {students: data});
-                }
-            })
-            .catch(error => {
-                console.log(error)
-                res.status(500).json({ message: 'Internal server error' });
-            });
+    // Assume data comes from some database operation
+    if (data.length > 0) {
+        res.render("students", {students: data});
     } else {
-        collegeData.getAllStudents()
-            .then(students => {
-                if (students.length === 0) {
-                    res.render("students", {message: "no results"});
-                } else {
-                    res.render("students", {students: data});
-                }
-            })
-            .catch(error => {
-                res.status(500).json({ message: 'Internal server error' });
-            });
+        res.render("students", {message: "no results"});
     }
+    // Handle rejected promises as needed
 });
+
+app.get('/courses', (req, res) => {
+    // Assume data comes from some database operation
+    if (data.length > 0) {
+        res.render("courses", {courses: data});
+    } else {
+        res.render("courses", {message: "no results"});
+    }
+    // Handle rejected promises as needed
+});
+
 
 // GET /tas
 app.get('/tas', (req, res) => {
@@ -70,26 +59,41 @@ app.get('/tas', (req, res) => {
         });
 });
 
-// GET /courses
-app.get('/courses', function (req, res) {
-    collegeData.getAllCourses().then(data => {
-        res.render('courses', {courses: data});
-    }).catch(err => {
-        res.render('courses', {message: 'no results'});
-    });
-});
+
 
 
 // GET /student/num
-app.get("/student/:studentNum", function(req, res) {
-    collegeData.getStudentByNum(req.params.studentNum)
+app.get("/student/:studentNum", (req, res) => {
+    let viewData = {};
+
+    data.getStudentByNum(req.params.studentNum)
         .then((data) => {
-            res.render("student", { student: data });
+            viewData.student = data ? data : null;
         })
-        .catch((err) => {
-            res.render("student", { message: err });
+        .catch(() => {
+            viewData.student = null;
+        })
+        .then(data.getCourses)
+        .then((data) => {
+            viewData.courses = data;
+            for (let i = 0; i < viewData.courses.length; i++) {
+                if (viewData.courses[i].courseId == viewData.student.course) {
+                    viewData.courses[i].selected = true;
+                }
+            }
+        })
+        .catch(() => {
+            viewData.courses = [];
+        })
+        .then(() => {
+            if (viewData.student == null) {
+                res.status(404).send("Student Not Found");
+            } else {
+                res.render("student", {viewData: viewData});
+            }
         });
 });
+
 
 
 // GET /
@@ -109,8 +113,14 @@ app.get("/htmlDemo", function (req, res) {
 });
 
 
-app.get("/Students/add", function (req, res) {
-    res.render("/Students/add");
+app.get("/students/add", (req, res) => {
+    collegeData.getCourses()
+        .then((data) => {
+            res.render("addStudent", {courses: data});
+        })
+        .catch(() => {
+            res.render("addStudent", {courses: []});
+        });
 });
 
 // setup http server to listen on HTTP_PORT

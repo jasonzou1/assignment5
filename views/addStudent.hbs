@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Student</title>
-    <!-- Include your CSS link here -->
     <link rel="stylesheet" href="/css/theme.css">
 </head>
 
 <body>
     <nav>
         <ul class="nav navbar-nav  mr-auto">
-            <!-- Add the other links here -->
             <li class="nav-item active">
                 <a class="nav-link" href="/students/add">Add Student</a>
             </li>
@@ -34,6 +32,20 @@
                 </div>
 
                 <!-- Add other form inputs here -->
+
+                <div class="form-group">
+                    <label>Course:</label>
+                    {{#if courses}}
+                      <select class="form-control" name="course" id="course">
+                            <option value="">Select Course</option>
+                            {{#each courses}}
+                                  <option value="{{courseId}}">{{courseCode}}</option>
+                            {{/each}}
+                      </select>
+                    {{else}}
+                      <div>No Courses</div>
+                    {{/if}}
+                </div>
 
                 <button type="submit" class="btn btn-primary">Add Student</button>
             </fieldset>

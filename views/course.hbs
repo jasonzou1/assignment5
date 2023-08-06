@@ -1,0 +1,8 @@
+<form action="/course/update" method="post">
+    <label for="courseCode">Course Code:</label>
+    <input type="text" name="courseCode" value="{{course.courseCode}}">
+    <label for="courseDescription">Course Description:</label>
+    <input type="text" name="courseDescription" value="{{course.courseDescription}}">
+    <input type="hidden" name="courseId" value="{{course.courseId}}">
+    <button type="submit">Update Course</button>
+</form>
